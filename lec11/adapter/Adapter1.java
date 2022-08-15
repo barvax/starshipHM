@@ -1,7 +1,5 @@
 package com.example.lec11.adapter;
 
-import android.content.Context;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,26 +7,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentManager;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lec11.R;
-import com.example.lec11.listeners.PassStarshipDataListener;
-import com.example.lec11.models.Starship;
-import com.example.lec11.ui.main.AboutFragment;
-import com.example.lec11.ui.main.FirstFragment;
+import com.example.lec11.listeners.PassPersonDataListener;
+import com.example.lec11.models.Person;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Adapter1 extends RecyclerView.Adapter<Adapter1.spaceViewHolder> {
-    List<Starship> starshipsList ;
+    List<Person> starshipsList ;
     public static final String STARSHIP = "param1";
-    private PassStarshipDataListener listener;
+    private PassPersonDataListener listener;
 
-    public Adapter1(List<Starship> starshipsList, PassStarshipDataListener listener) {
+    public Adapter1(List<Person> starshipsList, PassPersonDataListener listener) {
         this.starshipsList = starshipsList;
         this.listener = listener;
     }
@@ -44,14 +36,15 @@ public class Adapter1 extends RecyclerView.Adapter<Adapter1.spaceViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull spaceViewHolder holder, int position) {
-        Starship starship = starshipsList.get(position);
-        holder.starshipName.setText(starship.getName());
+        Person person = starshipsList.get(position);
+        holder.starshipName.setText(person.getName());
         View z = holder.itemView.findViewById(R.id.tv_starship_name);
 
 
 
         z.setOnClickListener(view -> {
-            listener.passData(starship ,z);
+//            Toast.makeText(z.getContext(), "position in adapter: "+position, Toast.LENGTH_SHORT).show();
+            listener.passData(person,z ,position);
 
 //            NavController controller = Navigation.findNavController(z);
 //            Bundle bundle = new Bundle();
